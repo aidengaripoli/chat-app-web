@@ -1,18 +1,79 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="name" v-show="!showChat">
+      <h2>enter username:</h2>
+      <input type="text" v-model="username">
+      <button @click="addUser">Enter Chat</button>
+    </div>
+    <div class="chat" v-show="showChat">
+      <ul>
+        <li v-for="(message, index) in messages" :key="index">
+          {{ message.username }}: {{ message.body }}
+        </li>
+      </ul>
+      <p v-show="usersTyping"
+        v-for="(user, index) in usersTyping"
+        :key="index"
+      >
+        {{ user }} is typing...
+      </p>
+      <input type="text" v-model="newMessage">
+      <button @click="sendMessage">Send</button>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
   name: 'home',
-  components: {
-    HelloWorld
+
+  data () {
+    return {
+      username: '',
+      showChat: false,
+      newMessage: '',
+      messages: [],
+      users: [],
+      usersTyping: []
+    }
+  },
+
+  sockets: {
+    connect () {
+      console.log('Socket connected.')
+    },
+
+    message ({ user, message }) {
+      console.log(`Received: ${message} from ${user.username}`)
+      this.messages.push({ username: user.username, body: message })
+    },
+
+    userJoined ({ user, userCount }) {
+      this.users.push(user)
+    },
+
+    typing ({ user }) {
+      this.usersTyping.push(user)
+    },
+
+    stopTyping ({ user }) {
+      this.usersTyping.splice(user.id, 1)
+    }
+  },
+
+  methods: {
+    sendMessage () {
+      if (this.newMessage === '') { return }
+      this.messages.push({ username: this.username, body: this.newMessage })
+      this.$socket.emit('newMessage', this.newMessage)
+
+      this.newMessage = ''
+    },
+
+    addUser () {
+      this.showChat = true
+      this.$socket.emit('addUser', this.username)
+    }
   }
 }
 </script>
