@@ -1,11 +1,11 @@
 <template>
   <div>
-    <p>Welcome to Chat App!</p>
+    <p>Register</p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'home'
+  name: 'register'
 }
 </script>
