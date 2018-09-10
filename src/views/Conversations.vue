@@ -2,19 +2,19 @@
   <div class="home">
     <div class="columns is-multiline">
       <div class="column is-3">
-        <Room />
+        <Conversation />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Room from '@/components/Room'
+import Conversation from '@/components/Conversation'
 
 export default {
-  name: 'rooms',
+  name: 'conversations',
 
-  components: { Room },
+  components: { Conversation },
 
   data () {
     return {}

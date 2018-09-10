@@ -2,12 +2,12 @@
   <div class="card">
     <header class="card-header">
       <p class="card-header-title">
-        Room #1
+        Conversation #1
       </p>
     </header>
     <div class="card-content">
       <div class="content">
-        <p>some room description</p>
+        <p>some conversation description</p>
       </div>
     </div>
     <footer class="card-footer">
@@ -18,6 +18,6 @@
 
 <script>
 export default {
-  name: 'room'
+  name: 'conversation'
 }
 </script>

@@ -14,7 +14,17 @@
 import Navbar from '@/components/Navbar'
 
 export default {
-  components: { Navbar }
+  components: { Navbar },
+
+  sockets: {
+    connect () {
+      this.$socket.emit('authenticate', localStorage.getItem('token'))
+    },
+
+    authenticated (data) {
+      console.log(`Authenticated: ${data}`)
+    }
+  }
 }
 </script>
 

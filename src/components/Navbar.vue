@@ -1,29 +1,19 @@
 <template>
   <div>
     <router-link to="/">Home</router-link> |
-    <router-link to="/rooms">Rooms</router-link> |
+    <router-link to="/conversations">Conversations</router-link> |
     <router-link to="/users">Users</router-link> |
-    <router-link v-if="loggedIn" to="/logout">Logout</router-link>
-    <router-link v-if="!loggedIn" to="/login">Login</router-link>
+    <router-link v-if="isAuthenticated" to="/logout">Logout</router-link>
+    <router-link v-if="!isAuthenticated" to="/login">Login</router-link>
   </div>
 </template>
 
 <script>
-import auth from '@/auth'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'navbar',
 
-  data () {
-    return {
-      loggedIn: auth.loggedIn()
-    }
-  },
-
-  created () {
-    auth.onChange = loggedIn => {
-      this.loggedIn = loggedIn
-    }
-  }
+  computed: mapGetters(['isAuthenticated'])
 }
 </script>

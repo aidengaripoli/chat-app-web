@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 
-import auth from './auth'
+import store from './store/'
 
 Vue.use(Router)
 
@@ -26,16 +26,16 @@ const router = new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/Register.vue')
     },
     {
-      path: '/rooms',
-      name: 'rooms',
-      component: () => import(/* webpackChunkName: "login" */ './views/Rooms.vue'),
+      path: '/conversations',
+      name: 'conversations',
+      component: () => import(/* webpackChunkName: "login" */ './views/Conversations.vue'),
       meta: { requiresAuth: true }
     },
     {
-      path: '/chatroom/:id',
-      name: 'chatroom',
+      path: '/conversation/:id',
+      name: 'conversation',
       props: true,
-      component: () => import(/* webpackChunkName: "login" */ './views/ChatRoom.vue'),
+      component: () => import(/* webpackChunkName: "login" */ './views/ConversationView.vue'),
       meta: { requiresAuth: true }
     },
     {
@@ -48,7 +48,7 @@ const router = new Router({
       path: '/logout',
       name: 'logout',
       beforeEnter (to, from, next) {
-        auth.logout()
+        store.dispatch('logout')
         next('/')
       }
     }
@@ -59,7 +59,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
-    if (!auth.loggedIn()) {
+    if (!store.getters['isAuthenticated']) {
       next({ path: '/login' })
     } else {
       next()
