@@ -20,9 +20,9 @@ const actions = {
     return new Promise((resolve, reject) => {
       commit(AUTH_REQUEST)
       auth.login(user).then(({ data }) => {
-        commit(AUTH_SUCCESS, data)
+        commit(AUTH_SUCCESS, data.token)
+        dispatch('fetchUser')
         resolve()
-        // dispatch(USER_REQUEST)
       }).catch(err => {
         commit(AUTH_ERROR, err)
       })
@@ -31,6 +31,7 @@ const actions = {
 
   logout ({ commit }) {
     commit(AUTH_LOGOUT)
+    this._vm.$socket.disconnect()
   },
 
   resetErrors ({ commit }) {
@@ -43,9 +44,9 @@ const mutations = {
     state.status = LOADING
   },
 
-  [AUTH_SUCCESS] (state, data) {
+  [AUTH_SUCCESS] (state, token) {
     state.status = SUCCESS
-    state.token = data.token
+    state.token = token
   },
 
   [AUTH_ERROR] (state, errors) {

@@ -11,7 +11,7 @@ import './assets/styles.scss'
 Vue.use(VueSocketIO, socketio('http://localhost:80', {
   reconnect: true,
   transports: ['websocket']
-}))
+}), store)
 
 Vue.config.productionTip = false
 

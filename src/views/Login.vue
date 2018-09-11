@@ -43,7 +43,14 @@
                 >
               </p>
 
-              <p v-if="errors" class="help is-danger">Invalid credentials</p>
+              <p
+                v-if="errors"
+                v-for="(message, index) in errors"
+                :key="index"
+                class="help is-danger"
+              >
+                {{ message }}
+              </p>
             </div>
           </div>
         </div>
@@ -88,6 +95,7 @@ export default {
       const { email, password } = this
       this.$store.dispatch('login', { email, password }).then(() => {
         this.$router.push({ name: 'conversations' })
+        this.$socket.connect()
       })
     },
 

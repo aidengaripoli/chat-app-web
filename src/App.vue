@@ -1,6 +1,13 @@
 <template>
   <div id="app">
     <Navbar id="nav" />
+    <p>
+      <strong
+        :style="connected === 'ONLINE' ? 'color: limegreen' : 'color: red'"
+      >
+        {{ connected }}
+      </strong>
+    </p>
 
     <div class="container">
       <div class="section">
@@ -16,13 +23,9 @@ import Navbar from '@/components/Navbar'
 export default {
   components: { Navbar },
 
-  sockets: {
-    connect () {
-      this.$socket.emit('authenticate', localStorage.getItem('token'))
-    },
-
-    authenticated (data) {
-      console.log(`Authenticated: ${data}`)
+  computed: {
+    connected () {
+      return this.$store.getters['connected'] ? 'ONLINE' : 'OFFLINE'
     }
   }
 }

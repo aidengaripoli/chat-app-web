@@ -3,7 +3,9 @@ import Vuex from 'vuex'
 
 import user from './modules/user'
 import auth from './modules/auth'
+import socket from './modules/socket'
 
+import createdPersistedState from 'vuex-persistedstate'
 import localStoragePlugin from './plugins/localStoragePlugin'
 
 Vue.use(Vuex)
@@ -13,8 +15,12 @@ const debug = process.env.NODE_ENV !== 'production'
 export default new Vuex.Store({
   modules: {
     user,
-    auth
+    auth,
+    socket
   },
-  plugins: [localStoragePlugin],
+  plugins: [
+    localStoragePlugin,
+    createdPersistedState()
+  ],
   strict: debug
 })

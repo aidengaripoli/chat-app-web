@@ -2,7 +2,7 @@
   <div class="home">
     <div class="columns is-multiline">
       <div class="column is-3">
-        <Conversation />
+        <!-- <Conversation /> -->
       </div>
     </div>
   </div>
