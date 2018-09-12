@@ -15,6 +15,7 @@
                 <input
                   v-model="email"
                   @keydown="resetErrors"
+                  @keydown.enter="login"
                   class="input"
                   :class="{ 'is-danger': errors }"
                   type="text"
