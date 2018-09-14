@@ -13,7 +13,8 @@ const router = new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      meta: { requiresAuth: true }
     },
     {
       path: '/login',
@@ -24,25 +25,6 @@ const router = new Router({
       path: '/register',
       name: 'register',
       component: () => import(/* webpackChunkName: "about" */ './views/Register.vue')
-    },
-    {
-      path: '/conversations',
-      name: 'conversations',
-      component: () => import(/* webpackChunkName: "login" */ './views/Conversations.vue'),
-      meta: { requiresAuth: true }
-    },
-    {
-      path: '/conversation/:id',
-      name: 'conversation',
-      props: true,
-      component: () => import(/* webpackChunkName: "login" */ './views/ConversationView.vue'),
-      meta: { requiresAuth: true }
-    },
-    {
-      path: '/users',
-      name: 'users',
-      component: () => import(/* webpackChunkName: "about" */ './views/Users.vue'),
-      meta: { requiresAuth: true }
     },
     {
       path: '/logout',

@@ -1,36 +1,48 @@
 <template>
   <div>
-    <div class="box">
-      <Message
-        v-for="(message, index) in messages"
+    <template v-if="currentConversationId">
+      <div class="box">
+        <Message
+          v-for="(message, index) in messages"
+          :key="index"
+          :message="message"
+        />
+      </div>
+
+      <!-- <p v-show="usersTyping"
+        v-for="(user, index) in usersTyping"
         :key="index"
-        :message="message"
-      />
+      >
+        {{ user.username }} is typing...
+      </p> -->
+
+      <ComposeMessage @sendMessage="appendMessage" />
+    </template>
+    <div v-else>
+      <p>Select a Conversation</p>
     </div>
-
-    <!-- <p v-show="usersTyping"
-      v-for="(user, index) in usersTyping"
-      :key="index"
-    >
-      {{ user.username }} is typing...
-    </p> -->
-
-    <NewMessage @sendMessage="appendMessage" />
   </div>
 </template>
 
 <script>
 import Message from './Message'
-import NewMessage from './NewMessage'
+import ComposeMessage from './ComposeMessage'
 
 export default {
   name: 'chat',
 
-  components: { Message, NewMessage },
+  components: {
+    Message,
+    ComposeMessage
+  },
 
-  data () {
-    return {
-      messages: []
+  computed: {
+    messages () {
+      return this.$store.getters.getConversationById(this.currentConversationId)
+    },
+
+    currentConversationId () {
+      return this.$store.getters.currentConversationId
     }
   },
 

@@ -13,12 +13,15 @@ const mutations = {
     state.connected = true
     this._vm.$socket.emit('authenticate', localStorage.getItem('token'))
   },
+
   SOCKET_DISCONNECT (state) {
     state.connected = false
   },
+
   SOCKET_AUTHENTICATED (state, userId) {
 
   },
+
   SOCKET_ONLINE_USERS (state, [onlineUsers]) {
     state.onlineUsers = onlineUsers
   }

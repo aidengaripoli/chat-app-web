@@ -1,5 +1,5 @@
 <template>
-  <div class="columns">
+  <div class="columns is-mobile is-vcentered login-form">
     <div class="column is-6 is-offset-3">
       <div v-if="isLoading">
         <p>LOADING...</p>
@@ -95,7 +95,7 @@ export default {
     login () {
       const { email, password } = this
       this.$store.dispatch('login', { email, password }).then(() => {
-        this.$router.push({ name: 'conversations' })
+        this.$router.push({ name: 'home' })
         this.$socket.connect()
       })
     },
@@ -108,3 +108,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.login-form {
+  height: 100vh;
+}
+</style>

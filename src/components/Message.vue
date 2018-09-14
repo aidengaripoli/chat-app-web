@@ -1,6 +1,7 @@
 <template>
   <div>
-    <span class="tag is-rounded">{{ message }}</span>
+    <span>{{ message.user.name }}</span>
+    <span class="tag is-rounded">{{ message.body }}</span>
   </div>
 </template>
 

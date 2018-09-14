@@ -1,54 +1,17 @@
 <template>
   <div id="app">
-    <Navbar id="nav" />
-    <p>
-      <strong
-        :style="connected === 'ONLINE' ? 'color: limegreen' : 'color: red'"
-      >
-        {{ connected }}
-      </strong>
-    </p>
-
-    <div class="container">
-      <div class="section">
-        <router-view/>
-      </div>
-    </div>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import Navbar from '@/components/Navbar'
-
 export default {
-  components: { Navbar },
-
-  computed: {
-    connected () {
-      return this.$store.getters['connected'] ? 'ONLINE' : 'OFFLINE'
-    }
-  }
+  name: 'app'
 }
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+  height: 100vh;
 }
 </style>

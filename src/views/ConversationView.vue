@@ -2,7 +2,7 @@
   <div class="columns">
     <div class="column is-4 is-offset-4">
       <p>conversation - {{ id }}</p>
-      <Chat />
+      <!-- <Chat :conversationId="id" /> -->
     </div>
   </div>
 </template>
