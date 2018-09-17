@@ -7,8 +7,8 @@ const getters = {
 }
 
 const actions = {
-  sendMessage () {
-    this._vm.$socket.emit('authenticate', localStorage.getItem('token'))
+  sendMessage (message) {
+    // this._vm.$socket.emit('authenticate', localStorage.getItem('token'))
   }
 }
 

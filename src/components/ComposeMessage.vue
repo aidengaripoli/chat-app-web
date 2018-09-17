@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  name: 'newMessage',
+  name: 'composeMessage',
 
   data () {
     return {
@@ -42,8 +42,20 @@ export default {
 
   methods: {
     sendMessage () {
-      this.$emit('sendMessage', this.newMessage)
-      this.newMessage = ''
+      if (this.newMessage.trim()) {
+        let message = {
+          conversationId: this.$store.getters.currentConversationId,
+          body: this.newMessage
+        }
+
+        this.$socket.emit('send_message', message)
+        this.$store.dispatch('addMessageToConversation', {
+          ...message,
+          user: this.$store.getters.user
+        })
+
+        this.newMessage = ''
+      }
     },
 
     startTyping () {

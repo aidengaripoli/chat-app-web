@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store/'
 
-import VueSocketIO from 'vue-socket.io'
+import VueSocketIO from 'vue-socket.io-extended'
 import socketio from 'socket.io-client'
 
 import './assets/styles.scss'
@@ -11,7 +11,7 @@ import './assets/styles.scss'
 Vue.use(VueSocketIO, socketio('http://localhost:80', {
   reconnect: true,
   transports: ['websocket']
-}), store)
+}), { store })
 
 Vue.config.productionTip = false
 

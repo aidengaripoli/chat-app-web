@@ -22,12 +22,17 @@ const mutations = {
 
   },
 
-  SOCKET_ONLINE_USERS (state, [onlineUsers]) {
+  SOCKET_ONLINE_USERS (state, onlineUsers) {
     state.onlineUsers = onlineUsers
   }
 }
 
-const actions = {}
+const actions = {
+  socket_newMessage ({ dispatch }, message) {
+    console.log(message)
+    dispatch('addMessageToConversation', message)
+  }
+}
 
 export default {
   state,
