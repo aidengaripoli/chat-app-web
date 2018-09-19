@@ -3,6 +3,7 @@ import store from './store/'
 
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:80'
+  // baseURL: 'http://18.212.174.206'
 })
 
 axiosInstance.interceptors.request.use(config => {
@@ -26,18 +27,4 @@ axiosInstance.interceptors.response.use(response => {
   return Promise.reject(errors)
 })
 
-class Auth {
-  register () {
-
-  }
-
-  login (user) {
-    return axiosInstance.post('/user/login', user)
-  }
-
-  user () {
-    return axiosInstance.get('/user/profile')
-  }
-}
-
-export default new Auth()
+export default axiosInstance

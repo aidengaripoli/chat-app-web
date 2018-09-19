@@ -8,7 +8,8 @@ import socketio from 'socket.io-client'
 
 import './assets/styles.scss'
 
-Vue.use(VueSocketIO, socketio('http://localhost:80', {
+// Vue.use(VueSocketIO, socketio('http://18.212.174.206:80', {
+Vue.use(VueSocketIO, socketio('http://localhost', {
   reconnect: true,
   transports: ['websocket']
 }), { store })

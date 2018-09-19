@@ -33,6 +33,11 @@ const router = new Router({
         store.dispatch('logout')
         next('/')
       }
+    },
+    {
+      path: '*',
+      name: 'notFound',
+      component: () => import(/* webpackChunkName: "notFound" */ './views/NotFound.vue')
     }
   ]
 })

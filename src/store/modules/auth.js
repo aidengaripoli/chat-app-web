@@ -1,6 +1,6 @@
 import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_ERROR, AUTH_LOGOUT, RESET_ERRORS } from '../mutation-types'
 import { LOADING, SUCCESS, ERROR } from '../status-types'
-import auth from '@/auth'
+import auth from '@/authService'
 
 const state = {
   token: localStorage.getItem('token') || null,

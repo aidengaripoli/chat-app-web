@@ -1,10 +1,15 @@
 <template>
   <div>
-    <ConversationItem
-      v-for="(conversation, id) in conversations" :key="id"
-      :conversation="conversation"
-      @click.native="selectConversation(id)"
-    />
+    <template v-if="conversations">
+      <ConversationItem
+        v-for="(conversation, id) in conversations" :key="id"
+        :conversation="conversation"
+        @click.native="selectConversation(id)"
+      />
+    </template>
+    <div v-else>
+      <p>No Conversations.</p>
+    </div>
   </div>
 </template>
 

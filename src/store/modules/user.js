@@ -1,6 +1,6 @@
 import { USER_REQUEST, USER_SUCCESS, USER_ERROR, AUTH_LOGOUT } from '../mutation-types'
 import { LOADING, SUCCESS, ERROR } from '../status-types'
-import auth from '@/auth'
+import auth from '@/authService'
 
 const state = {
   user: null,
