@@ -2,8 +2,7 @@ import axios from 'axios'
 import store from './store/'
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:80'
-  // baseURL: 'http://18.212.174.206'
+  baseURL: process.env.VUE_APP_ROOT_API
 })
 
 axiosInstance.interceptors.request.use(config => {
