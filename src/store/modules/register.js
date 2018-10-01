@@ -1,8 +1,4 @@
 import {
-  AUTH_REQUEST,
-  AUTH_SUCCESS,
-  AUTH_ERROR,
-  AUTH_LOGOUT,
   RESET_ERRORS,
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
@@ -18,41 +14,23 @@ const state = {
 }
 
 const getters = {
-  isAuthenticated: state => !!state.token,
   isLoading: state => state.status === LOADING,
   authStatus: state => state.status,
   errors: state => state.errors
 }
 
 const actions = {
-  login ({ commit, dispatch }, user) {
-    return new Promise(resolve => {
-      commit(AUTH_REQUEST)
-      auth.login(user).then(({ data }) => {
-        commit(AUTH_SUCCESS, data.token)
-        dispatch('fetchUser')
-        resolve()
-      }).catch(err => {
-        commit(AUTH_ERROR, err)
-      })
-    })
-  },
-
-  register ({ commit }, details) {
+  register ({ commit, dispatch }, details) {
     return new Promise(resolve => {
       commit(REGISTER_REQUEST)
       auth.register(details).then(({ data }) => {
         commit(REGISTER_SUCCESS, data.token)
+        dispatch('fetchUser')
         resolve()
       }).catch(err => {
         commit(REGISTER_ERROR, err)
       })
     })
-  },
-
-  logout ({ commit }) {
-    commit(AUTH_LOGOUT)
-    this._vm.$socket.disconnect()
   },
 
   resetErrors ({ commit }) {
@@ -61,26 +39,6 @@ const actions = {
 }
 
 const mutations = {
-  [AUTH_REQUEST] (state) {
-    state.status = LOADING
-  },
-
-  [AUTH_SUCCESS] (state, token) {
-    state.status = SUCCESS
-    state.token = token
-  },
-
-  [AUTH_ERROR] (state, errors) {
-    state.status = ERROR
-    state.errors = errors
-  },
-
-  [AUTH_LOGOUT] (state) {
-    state.status = null
-    state.errors = null
-    state.token = null
-  },
-
   [REGISTER_REQUEST] (state) {
     state.status = LOADING
   },
@@ -93,6 +51,7 @@ const mutations = {
   [REGISTER_ERROR] (state, errors) {
     state.status = ERROR
     state.errors = errors
+    state.token = null
   },
 
   [RESET_ERRORS] (state) {
@@ -101,6 +60,7 @@ const mutations = {
 }
 
 export default {
+  namespaced: true,
   state,
   getters,
   actions,

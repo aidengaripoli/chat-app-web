@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 import user from './modules/user'
 import auth from './modules/auth'
+// import register from './modules/register'
 import socket from './modules/socket'
 import conversations from './modules/conversations'
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
   modules: {
     user,
     auth,
+    // register,
     socket,
     conversations
   },

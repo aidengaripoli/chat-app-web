@@ -1,25 +1,22 @@
 <template>
   <div>
-    <template v-if="currentConversationId">
-      <div class="box">
-        <Message
-          v-for="(message, index) in messages"
-          :key="index"
-          :message="message"
-        />
+    <div v-if="currentConversationId" class="ca-chat">
+      <div class="card ca-message-list">
+        <div class="card-content">
+          <Message
+            v-for="(message, index) in messages"
+            :key="index"
+            :message="message"
+          />
+        </div>
       </div>
 
-      <!-- <p v-show="usersTyping"
-        v-for="(user, index) in usersTyping"
-        :key="index"
-      >
-        {{ user.username }} is typing...
-      </p> -->
-
       <ComposeMessage @sendMessage="appendMessage" />
-    </template>
+    </div>
     <div v-else>
-      <p>Select a Conversation</p>
+      <div class="section ca-select-conversation">
+        <p>No conversations selected.</p>
+      </div>
     </div>
   </div>
 </template>
@@ -38,7 +35,7 @@ export default {
 
   computed: {
     messages () {
-      return this.$store.getters.getConversationById(this.currentConversationId)
+      return this.$store.getters.getConversationById(this.currentConversationId).messages
     },
 
     currentConversationId () {
@@ -53,3 +50,20 @@ export default {
   }
 }
 </script>
+
+<style>
+.ca-chat {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.ca-message-list {
+  flex: 1;
+}
+
+.ca-select-conversation {
+  display: flex;
+  justify-content: center;
+}
+</style>

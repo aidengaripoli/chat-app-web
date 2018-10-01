@@ -59,7 +59,7 @@ export default {
     },
 
     startTyping () {
-      // this.$socket.emit('typing')
+      this.$socket.emit('typing', this.$store.getters.currentConversationId)
     }
   }
 }

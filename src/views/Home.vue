@@ -1,18 +1,8 @@
 <template>
-  <div>
-    <ConnectionStatus />
-
-    <div class="columns is-mobile">
-      <div class="column is-3">
-        <Users />
-      </div>
-
-      <Conversations class="column is-3" />
-
-      <div class="column is-6">
-        <Chat />
-      </div>
-    </div>
+  <div class="columns is-mobile is-gapless ca-home">
+    <Users class="column is-3" />
+    <Conversations class="column is-4" />
+    <Chat class="column is-5" />
   </div>
 </template>
 
@@ -20,16 +10,24 @@
 import Chat from '@/components/Chat'
 import Users from '@/components/Users'
 import Conversations from '@/components/Conversations'
-import ConnectionStatus from '@/components/ConnectionStatus'
 
 export default {
   name: 'home',
 
+  mounted () {
+    this.$store.dispatch('selectConversation', null)
+  },
+
   components: {
     Chat,
     Users,
-    Conversations,
-    ConnectionStatus
+    Conversations
   }
 }
 </script>
+
+<style>
+.ca-home {
+  height: calc(100% - 24px); /* ConnectionStatus component has a height of 24px */
+}
+</style>

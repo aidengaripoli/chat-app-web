@@ -16,7 +16,7 @@ axiosInstance.interceptors.response.use(response => {
   if (error.response) {
     const status = error.response.status
     if (status === 400 || status === 401) {
-      if (!(error.config.method === 'post' && /\/api\/login\/?$/.test(error.config.url))) {
+      if (!(error.config.method === 'post' && /\/login\/?$/.test(error.config.url))) {
         store.dispatch('logout') // token is invalid, logout
       }
     }

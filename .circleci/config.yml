@@ -7,18 +7,22 @@ version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
       - image: circleci/node:7.10
-      
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
-    working_directory: ~/repo
 
     steps:
       - checkout
+
+      - run:
+          name: Install dependencies
+          working_directory: /
+          command: |
+            apt-get -y -qq update
+            apt-get -y -qq install python3.4-dev
+            curl -O https://bootstrap.pypa.io/get-pip.py
+            python3.4 get-pip.py --user
+            pip install awscli --upgrade --user
+
+      working_directory: ~/repo
 
       # Download and cache dependencies
       - restore_cache:
@@ -33,13 +37,11 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-        
-      # # run tests!
-      # - run: yarn test
+
       - run:
           name: Install awscli
           command: sudo pip install awscli
+
       - run:
           name: Deploy to S3
-          command: aws s3 ...
-        
+          command: aws s3 sync dist/ s3://chat-app-web --delete

@@ -1,6 +1,8 @@
 @import '../../node_modules/bulma/sass/utilities/initial-variables';
 @import '../../node_modules/bulma/sass/utilities/functions';
 
-// $primary: #ffb3b3;
+$card-shadow: none;
+$card-header-shadow: none;
+$card-background-color: transparent;
 
 @import '../../node_modules/bulma/bulma';

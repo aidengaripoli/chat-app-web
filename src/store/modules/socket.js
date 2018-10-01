@@ -29,8 +29,11 @@ const mutations = {
 
 const actions = {
   socket_newMessage ({ dispatch }, message) {
-    console.log(message)
     dispatch('addMessageToConversation', message)
+  },
+
+  socket_newConversation ({ dispatch }, conversation) {
+    dispatch('addNewConversation', conversation)
   }
 }
 

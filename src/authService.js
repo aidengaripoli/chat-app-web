@@ -1,8 +1,8 @@
 import http from './http'
 
 class AuthService {
-  register () {
-
+  register (details) {
+    return http.post('/user/register', details)
   }
 
   login (user) {
