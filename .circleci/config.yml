@@ -16,11 +16,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apt-get -y -qq update
-            apt-get -y -qq install python3.4-dev
-            curl -O https://bootstrap.pypa.io/get-pip.py
-            python3.4 get-pip.py --user
-            pip install awscli --upgrade --user
+            apt-get update && apt-get install -y awscli
       # Download and cache dependencies
       - restore_cache:
           keys:
