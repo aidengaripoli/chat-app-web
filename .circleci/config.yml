@@ -16,7 +16,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            sudo apt-get update && apt-get install -y awscli
+            sudo apt-get update && sudo apt-get install -y awscli
       # Download and cache dependencies
       - restore_cache:
           keys:
