@@ -71,6 +71,13 @@
             </div>
           </div>
         </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label"></div>
+          <div class="control">
+            <router-link to="/register" class="button is-text">Register</router-link>
+          </div>
+        </div>
       </template>
     </div>
   </div>
