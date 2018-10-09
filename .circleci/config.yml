@@ -36,4 +36,4 @@ jobs:
           command: yarn build
       - run:
           name: Deploy to S3
-          command: aws s3 sync dist/ s3://chat-app-web --delete
+          command: aws s3 sync dist/ s3://chat-app-web-spa --delete
