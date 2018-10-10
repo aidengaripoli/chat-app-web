@@ -60,7 +60,7 @@ export default {
 
   filters: {
     sentAt (timestamp) {
-      return format(timestamp, 'h:mma')
+      return format(timestamp, 'd:h:mma')
     }
   }
 }
