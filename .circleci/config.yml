@@ -28,9 +28,6 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      # - run:
-      #     name: Install awscli
-      #     command: sudo pip install awscli
       - run:
           name: Build Static Assests
           command: yarn build

@@ -1,10 +1,7 @@
 <template>
   <div class="columns is-mobile is-vcentered login-form">
     <div class="column is-6 is-offset-3">
-      <div v-if="isLoading">
-        <p>LOADING...</p>
-      </div>
-      <template v-else>
+      <template>
         <div class="field is-horizontal">
           <div class="field-label is-normal">
             <label class="label">Email</label>
@@ -20,6 +17,7 @@
                   :class="{ 'is-danger': errors }"
                   type="text"
                   placeholder="email"
+                  :disabled="isLoading"
                 >
               </p>
             </div>
@@ -41,6 +39,7 @@
                   :class="{ 'is-danger': errors }"
                   type="password"
                   placeholder="Password"
+                  :disabled="isLoading"
                 >
               </p>
 
@@ -64,6 +63,8 @@
                 <button
                   @click="login"
                   class="button is-primary is-fullwidth"
+                  :class="{ 'is-loading': isLoading }"
+                  :disabled="isLoading"
                 >
                   Login
                 </button>

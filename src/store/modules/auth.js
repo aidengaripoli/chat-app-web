@@ -6,7 +6,10 @@ import {
   RESET_ERRORS,
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
-  REGISTER_ERROR
+  REGISTER_ERROR,
+  USER_REQUEST,
+  USER_SUCCESS,
+  USER_ERROR
 } from '../mutation-types'
 import { LOADING, SUCCESS, ERROR } from '../status-types'
 import auth from '@/authService'
@@ -14,6 +17,7 @@ import auth from '@/authService'
 const state = {
   token: localStorage.getItem('token') || null,
   status: null,
+  user: null,
   errors: null
 }
 
@@ -21,6 +25,7 @@ const getters = {
   isAuthenticated: state => !!state.token,
   isLoading: state => state.status === LOADING,
   authStatus: state => state.status,
+  user: state => state.user,
   errors: state => state.errors
 }
 
@@ -30,8 +35,9 @@ const actions = {
       commit(AUTH_REQUEST)
       auth.login(user).then(({ data }) => {
         commit(AUTH_SUCCESS, data.token)
-        dispatch('fetchUser')
-        resolve()
+        dispatch('fetchUser').then(() => {
+          resolve()
+        })
       }).catch(err => {
         commit(AUTH_ERROR, err)
       })
@@ -47,6 +53,21 @@ const actions = {
         resolve()
       }).catch(err => {
         commit(REGISTER_ERROR, err)
+      })
+    })
+  },
+
+  fetchUser ({ commit, dispatch }) {
+    return new Promise((resolve, reject) => {
+      commit(USER_REQUEST)
+      auth.user().then(({ data }) => {
+        commit(USER_SUCCESS, data.user)
+        dispatch('fetchConversations')
+        resolve()
+      }).catch(err => {
+        commit(USER_ERROR, err)
+        commit(AUTH_LOGOUT)
+        reject(err)
       })
     })
   },
@@ -67,7 +88,7 @@ const mutations = {
   },
 
   [AUTH_SUCCESS] (state, token) {
-    state.status = SUCCESS
+    // state.status = SUCCESS
     state.token = token
   },
 
@@ -82,12 +103,26 @@ const mutations = {
     state.token = null
   },
 
+  [USER_REQUEST] (state) {
+    state.status = LOADING
+  },
+
+  [USER_SUCCESS] (state, user) {
+    state.status = SUCCESS
+    state.user = user
+  },
+
+  [USER_ERROR] (state, errors) {
+    state.status = ERROR
+    state.errors = errors
+  },
+
   [REGISTER_REQUEST] (state) {
     state.status = LOADING
   },
 
   [REGISTER_SUCCESS] (state, token) {
-    state.status = SUCCESS
+    // state.status = SUCCESS
     state.token = token
   },
 

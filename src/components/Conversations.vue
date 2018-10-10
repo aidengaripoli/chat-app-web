@@ -24,10 +24,6 @@ export default {
 
   components: { ConversationItem },
 
-  created () {
-    this.$store.dispatch('fetchConversations')
-  },
-
   computed: {
     conversations () {
       return this.$store.getters['conversations']
@@ -44,8 +40,6 @@ export default {
 
 <style>
 .ca-conversation-list {
-  /* border-right: 1px solid grey; */
-  /* box-shadow: -2px 0px 14px 0px rgba(164,164,164,0.75); */
   box-shadow: 2px 0px 8px -4px rgba(164,164,164,0.75);
   background-color: #f4f6fb;
 }

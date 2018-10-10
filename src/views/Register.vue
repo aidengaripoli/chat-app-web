@@ -1,10 +1,7 @@
 <template>
   <div class="columns is-mobile is-vcentered register-form">
     <div class="column is-6 is-offset-3">
-      <div v-if="isLoading">
-        <p>LOADING...</p>
-      </div>
-      <template v-else>
+      <template>
         <div class="field is-horizontal">
           <div class="field-label is-normal">
             <label class="label">Name</label>
@@ -20,6 +17,7 @@
                   :class="{ 'is-danger': errors }"
                   type="text"
                   placeholder="Name"
+                  :disabled="isLoading"
                 >
               </p>
             </div>
@@ -41,6 +39,7 @@
                   :class="{ 'is-danger': errors }"
                   type="text"
                   placeholder="Email"
+                  :disabled="isLoading"
                 >
               </p>
             </div>
@@ -62,6 +61,7 @@
                   :class="{ 'is-danger': errors }"
                   type="password"
                   placeholder="Password"
+                  :disabled="isLoading"
                 >
               </p>
             </div>
@@ -83,6 +83,7 @@
                   :class="{ 'is-danger': errors }"
                   type="password"
                   placeholder="Password"
+                  :disabled="isLoading"
                 >
               </p>
 
@@ -106,11 +107,20 @@
                 <button
                   @click="register"
                   class="button is-primary is-fullwidth"
+                  :class="{ 'is-loading': isLoading }"
+                  :disabled="isLoading"
                 >
                   Register
                 </button>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label"></div>
+          <div class="control">
+            <router-link to="/login" class="button is-text">Login</router-link>
           </div>
         </div>
       </template>

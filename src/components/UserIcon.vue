@@ -2,6 +2,7 @@
   <div>
     <h1 class="title is-4 ca-user-name">
       {{ user.name | capitalize }}
+      <span v-show="me._id == user._id">(me)</span>
     </h1>
   </div>
 </template>
@@ -10,7 +11,13 @@
 export default {
   name: 'userIcon',
 
-  props: ['user']
+  props: ['user'],
+
+  computed: {
+    me () {
+      return this.$store.getters.user
+    }
+  }
 }
 </script>
 
