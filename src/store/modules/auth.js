@@ -38,11 +38,12 @@ const actions = {
     })
   },
 
-  register ({ commit }, details) {
+  register ({ commit, dispatch }, details) {
     return new Promise(resolve => {
       commit(REGISTER_REQUEST)
       auth.register(details).then(({ data }) => {
         commit(REGISTER_SUCCESS, data.token)
+        dispatch('fetchUser')
         resolve()
       }).catch(err => {
         commit(REGISTER_ERROR, err)
