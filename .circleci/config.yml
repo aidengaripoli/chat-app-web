@@ -34,9 +34,9 @@ jobs:
       - run:
           name: Deploy to S3
           command: aws s3 sync dist/ s3://chat-app-web-spa --delete
-      - run:
-          name: Configure AWS CLI cloudfront preview service
-          command: aws configure set preview.cloudfront true
-      - run:
-          name: Invalidate Cloudfront
-          command: aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths '/*'
+      # - run:
+      #     name: Configure AWS CLI cloudfront preview service
+      #     command: aws configure set preview.cloudfront true
+      # - run:
+      #     name: Invalidate Cloudfront
+      #     command: aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths '/*'
